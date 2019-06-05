@@ -16,12 +16,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: 'cfn-modules: Fargate scheduled task'
 # cfn-modules:implements()
 Parameters:
-  ClusterModule:
-    Description: 'Stack name of ecs-cluster module.'
-    Type: String
   VpcModule:
     Description: 'Stack name of vpc module.'
     Type: String
+  ClusterModule:
+    Description: 'Optional stack name of ecs-cluster module (if empty, an ECS cluster is created).'
+    Type: String
+    Default: ''
   AlertingModule:
     Description: 'Optional but recommended stack name of alerting module.'
     Type: String
@@ -234,6 +235,8 @@ Mappings:
     '30':
       Memory: 30720
 Conditions:
+  HasNotClusterModule: !Equals [!Ref ClusterModule, '']
+  HasClusterModule: !Not [!Condition HasNotClusterModule]
   HasAlertingModule: !Not [!Equals [!Ref AlertingModule, '']]
   HasClientSgModule1: !Not [!Equals [!Ref ClientSgModule1, '']]
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
@@ -251,6 +254,10 @@ Conditions:
   HasSidecarEnvironment2Key: !Not [!Equals [!Ref SidecarEnvironment2Key, '']]
   HasSidecarEnvironment3Key: !Not [!Equals [!Ref SidecarEnvironment3Key, '']]
 Resources:
+  Cluster:
+    Condition: HasNotClusterModule
+    Type: 'AWS::ECS::Cluster'
+    Properties: {}
   TaskExecutionRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -387,7 +394,7 @@ Resources:
             Resource: !Ref TaskDefinition
             Condition:
               ArnEquals:
-                'ecs:cluster': {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}
+                'ecs:cluster': !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}, !GetAtt Cluster.Arn]
           - Effect: Allow
             Action:
             - 'ecs:StopTask'
@@ -395,7 +402,7 @@ Resources:
             Resource: '*'
             Condition:
               ArnEquals:
-                'ecs:cluster': {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}
+                'ecs:cluster': !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}, !GetAtt Cluster.Arn]
           - Effect: Allow
             Action:
             - 'events:PutTargets'
@@ -442,7 +449,7 @@ Resources:
             }
           }
         }
-      - Cluster: {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}
+      - Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Arn'}, !GetAtt Cluster.Arn]
         TaskDefinition: !Ref TaskDefinition
         SubnetA: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdA${SubnetsReach}'}
         SubnetB: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdB${SubnetsReach}'}
