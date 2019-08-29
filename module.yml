@@ -313,6 +313,48 @@ Resources:
             - 'logs:CreateLogStream'
             - 'logs:PutLogEvents'
             Resource: !GetAtt 'LogGroup.Arn'
+          - !If
+            - HasAppEnvironment1Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment2Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment3Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment1Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment2Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment3Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
   TaskRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -542,7 +584,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-scheduled-task'
   ModuleVersion:
-    Value: '1.1.0'
+    Value: '1.2.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
