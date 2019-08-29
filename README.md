@@ -34,10 +34,13 @@ Resources:
         AppCommand: '' # optional
         AppEnvironment1Key: '' # optional
         AppEnvironment1Value: '' # optional
+        AppEnvironment1SecretModule: '' # optional
         AppEnvironment2Key: '' # optional
         AppEnvironment2Value: '' # optional
+        AppEnvironment2SecretModule: '' # optional
         AppEnvironment3Key: '' # optional
         AppEnvironment3Value: '' # optional
+        AppEnvironment3SecretModule: '' # optional
         AppEnvironment4Key: '' # optional
         AppEnvironment4Value: '' # optional
         AppEnvironment5Key: '' # optional
@@ -48,10 +51,13 @@ Resources:
         SidecarPort: '' # optional
         SidecarEnvironment1Key: '' # optional
         SidecarEnvironment1Value: '' # optional
+        SidecarEnvironment1SecretModule: '' # optional
         SidecarEnvironment2Key: '' # optional
         SidecarEnvironment2Value: '' # optional
+        SidecarEnvironment2SecretModule: '' # optional
         SidecarEnvironment3Key: '' # optional
         SidecarEnvironment3Value: '' # optional
+        SidecarEnvironment3SecretModule: '' # optional
         Cpu: '' # optional
         Memory: '' # optional
         LogsRetentionInDays: '' # optional
@@ -139,7 +145,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment1Value</td>
-      <td>Environment variable 1 value for app container</td>
+      <td>Environment variable 1 plain-text value for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment1SecretModule</td>
+      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -153,7 +166,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment2Value</td>
-      <td>Environment variable 2 value for app container</td>
+      <td>Environment variable 2 plain-text value for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment2SecretModule</td>
+      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -167,7 +187,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment3Value</td>
-      <td>Environment variable 3 value for app container</td>
+      <td>Environment variable 3 plain-text value for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment3SecretModule</td>
+      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -181,7 +208,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment4Value</td>
-      <td>Environment variable 4 value for app container</td>
+      <td>Environment variable 4 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -195,7 +222,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment5Value</td>
-      <td>Environment variable 5 value for app container</td>
+      <td>Environment variable 5 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -209,7 +236,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment6Value</td>
-      <td>Environment variable 6 value for app container</td>
+      <td>Environment variable 6 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -237,7 +264,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment1Value</td>
-      <td>Environment variable 1 value for sidecar container</td>
+      <td>Environment variable 1 plain-text value for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment1SecretModule</td>
+      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -251,7 +285,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment2Value</td>
-      <td>Environment variable 2 value for sidecar container</td>
+      <td>Environment variable 2 plain-text value for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment2SecretModule</td>
+      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -265,7 +306,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment3Value</td>
-      <td>Environment variable 3 value for sidecar container</td>
+      <td>Environment variable 3 plain-text value for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment3SecretModule</td>
+      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>

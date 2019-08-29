@@ -55,6 +55,10 @@ Parameters:
     Description: 'Optional environment variable 1 value for app container.'
     Type: String
     Default: ''
+  AppEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule).'
+    Type: String
+    Default: ''
   AppEnvironment2Key:
     Description: 'Optional environment variable 2 key for app container.'
     Type: String
@@ -63,12 +67,20 @@ Parameters:
     Description: 'Optional environment variable 2 value for app container.'
     Type: String
     Default: ''
+  AppEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule).'
+    Type: String
+    Default: ''
   AppEnvironment3Key:
     Description: 'Optional environment variable 3 key for app container.'
     Type: String
     Default: ''
   AppEnvironment3Value:
     Description: 'Optional environment variable 3 value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule).'
     Type: String
     Default: ''
   AppEnvironment4Key:
@@ -113,6 +125,10 @@ Parameters:
     Description: 'Optional environment variable 1 value for sidecar container.'
     Type: String
     Default: ''
+  SidecarEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule).'
+    Type: String
+    Default: ''
   SidecarEnvironment2Key:
     Description: 'Optional environment variable 2 key for sidecar container.'
     Type: String
@@ -121,12 +137,20 @@ Parameters:
     Description: 'Optional environment variable 2 value for sidecar container.'
     Type: String
     Default: ''
+  SidecarEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule).'
+    Type: String
+    Default: ''
   SidecarEnvironment3Key:
     Description: 'Optional environment variable 3 key for sidecar container.'
     Type: String
     Default: ''
   SidecarEnvironment3Value:
     Description: 'Optional environment variable 3 value for sidecar container.'
+    Type: String
+    Default: ''
+  SidecarEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule).'
     Type: String
     Default: ''
   Cpu:
@@ -243,16 +267,22 @@ Conditions:
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
   HasAppCommand: !Not [!Equals [!Join ['', !Ref AppCommand], '']]
   HasAppEntryPoint: !Not [!Equals [!Ref AppEntryPoint, '']]
-  HasAppEnvironment1Key: !Not [!Equals [!Ref AppEnvironment1Key, '']]
-  HasAppEnvironment2Key: !Not [!Equals [!Ref AppEnvironment2Key, '']]
-  HasAppEnvironment3Key: !Not [!Equals [!Ref AppEnvironment3Key, '']]
-  HasAppEnvironment4Key: !Not [!Equals [!Ref AppEnvironment4Key, '']]
-  HasAppEnvironment5Key: !Not [!Equals [!Ref AppEnvironment5Key, '']]
-  HasAppEnvironment6Key: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment1PlainText: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Equals [!Ref AppEnvironment1SecretModule, '']]
+  HasAppEnvironment2PlainText: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Equals [!Ref AppEnvironment2SecretModule, '']]
+  HasAppEnvironment3PlainText: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Equals [!Ref AppEnvironment3SecretModule, '']]
+  HasAppEnvironment4PlainText: !Not [!Equals [!Ref AppEnvironment4Key, '']]
+  HasAppEnvironment5PlainText: !Not [!Equals [!Ref AppEnvironment5Key, '']]
+  HasAppEnvironment6PlainText: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
+  HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
+  HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
   HasSidecarImage: !Not [!Equals [!Ref SidecarImage, '']]
-  HasSidecarEnvironment1Key: !Not [!Equals [!Ref SidecarEnvironment1Key, '']]
-  HasSidecarEnvironment2Key: !Not [!Equals [!Ref SidecarEnvironment2Key, '']]
-  HasSidecarEnvironment3Key: !Not [!Equals [!Ref SidecarEnvironment3Key, '']]
+  HasSidecarEnvironment1PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Equals [!Ref SidecarEnvironment1SecretModule, '']]
+  HasSidecarEnvironment2PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment2Key, '']], !Equals [!Ref SidecarEnvironment2SecretModule, '']]
+  HasSidecarEnvironment3PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Equals [!Ref SidecarEnvironment3SecretModule, '']]
+  HasSidecarEnvironment1Secret: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Not [!Equals [!Ref SidecarEnvironment1SecretModule, '']]]
+  HasSidecarEnvironment2Secret: !And [!Not [!Equals [!Ref SidecarEnvironment2Key, '']], !Not [!Equals [!Ref SidecarEnvironment2SecretModule, '']]]
+  HasSidecarEnvironment3Secret: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Not [!Equals [!Ref SidecarEnvironment3SecretModule, '']]]
 Resources:
   Cluster:
     Condition: HasNotClusterModule
@@ -325,12 +355,16 @@ Resources:
             'awslogs-group': !Ref LogGroup
             'awslogs-stream-prefix': app
         Environment:
-        - !If [HasAppEnvironment1Key, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment2Key, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment3Key, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment4Key, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment5Key, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment6Key, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment1PlainText, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2PlainText, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3PlainText, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+        Secrets:
+        - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
@@ -346,9 +380,13 @@ Resources:
               'awslogs-group': !Ref LogGroup
               'awslogs-stream-prefix': sidecar
           Environment:
-          - !If [HasSidecarEnvironment1Key, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment2Key, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment3Key, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment1PlainText, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment2PlainText, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment3PlainText, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
+          Secrets:
+          - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       Cpu: !FindInMap [CpuMap, !Ref Cpu, Cpu]
       ExecutionRoleArn: !GetAtt 'TaskExecutionRole.Arn'
@@ -504,7 +542,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-scheduled-task'
   ModuleVersion:
-    Value: '1.0.0'
+    Value: '1.1.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
