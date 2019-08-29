@@ -1,6 +1,6 @@
 {
   "name": "@cfn-modules/fargate-scheduled-task",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fargate scheduled task",
   "author": "Andreas Wittig <andreas@widdix.de>",
   "license": "Apache-2.0",
