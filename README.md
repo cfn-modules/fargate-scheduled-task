@@ -67,6 +67,14 @@ Resources:
       TemplateURL: './node_modules/@cfn-modules/fargate-scheduled-task/module.yml'
 ```
 
+## Examples
+
+none
+
+## Related modules
+
+none
+
 ## Parameters
 
 <table>
