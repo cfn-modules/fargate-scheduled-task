@@ -5,7 +5,7 @@
 
 Executing an AWS Fargate task based on a schedule (comparable to a `cronjob` on Linux). Uses AWS Step Functions to control and monitor the task execution.
 
-> :books: Check out our new book [Rapid Docker on AWS](https://cloudonaut.io/rapid-docker-on-aws/?utm_source=aws-velocity&utm_medium=doc&utm_campaign=readme)
+> :books: Check out our new book [Rapid Docker on AWS](https://cloudonaut.io/rapid-docker-on-aws/?utm_source=cfn-modules&utm_medium=doc&utm_campaign=fargate-scheduled-task)
 > * Written for DevOps engineers and web developers who want to run dockerized web applications on AWS.
 > * Prior knowledge of Docker and AWS is not required.
 > * Continuous Deployment of your Web Application and Infrastructure as Code.
