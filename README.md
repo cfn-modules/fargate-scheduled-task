@@ -35,6 +35,7 @@ Resources:
         ClientSgModule1: '' # optional
         ManagedPolicyArns: '' # optional
         AppImage: '' # optional
+        AppImageSecretModule '' # optional
         AppEntryPoint: '' # optional
         AppCommand: '' # optional
         AppEnvironment1Key: '' # optional
@@ -53,6 +54,7 @@ Resources:
         AppEnvironment6Key: '' # optional
         AppEnvironment6Value: '' # optional
         SidecarImage: '' # optional
+        SidecarImageSecretModule '' # optional
         SidecarPort: '' # optional
         SidecarEnvironment1Key: '' # optional
         SidecarEnvironment1Value: '' # optional
@@ -116,7 +118,7 @@ none
     </tr>
     <tr>
       <td>ClientSgModule1</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> module to mark traffic from EC2 instance</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from EC2 instance</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -130,8 +132,15 @@ none
     </tr>    
     <tr>
       <td>AppImage</td>
-      <td>The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
+      <td>The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!</td>
       <td>widdix/hello:v1</td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppImageSecretModule</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> which contains the repository credentials for private registry authentication</td>
+      <td></td>
       <td>no</td>
       <td></td>
     </tr>
@@ -256,7 +265,14 @@ none
     </tr>
     <tr>
       <td>SidecarImage</td>
-      <td>Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
+      <td>Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set SidecarImageSecretModule as well!</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarImageSecretModule</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> which contains the repository credentials for private registry authentication</td>
       <td></td>
       <td>no</td>
       <td></td>
