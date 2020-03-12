@@ -28,5 +28,3 @@ Resources:
         AppImageSecretModule: !GetAtt 'Secret.Outputs.StackName'
         AppCommand: 'echo,test'
       TemplateURL: './node_modules/@cfn-modules/fargate-scheduled-task/module.yml'
-
-
