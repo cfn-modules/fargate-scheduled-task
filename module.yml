@@ -27,8 +27,20 @@ Parameters:
     Description: 'Optional but recommended stack name of alerting module.'
     Type: String
     Default: ''
+  FileSystemModule1:
+    Description: 'Optional stack name of efs-file-system module.'
+    Type: String
+    Default: ''
   ClientSgModule1:
-    Description: 'Optional stack name of client-sg module to mark traffic from EC2 instance.'
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
+    Type: String
+    Default: ''
+  ClientSgModule2:
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
+    Type: String
+    Default: ''
+  ClientSgModule3:
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
     Type: String
     Default: ''
   ManagedPolicyArns:
@@ -270,7 +282,10 @@ Conditions:
   HasNotClusterModule: !Equals [!Ref ClusterModule, '']
   HasClusterModule: !Not [!Condition HasNotClusterModule]
   HasAlertingModule: !Not [!Equals [!Ref AlertingModule, '']]
+  HasFileSystemModule1: !Not [!Equals [!Ref FileSystemModule1, '']]
   HasClientSgModule1: !Not [!Equals [!Ref ClientSgModule1, '']]
+  HasClientSgModule2: !Not [!Equals [!Ref ClientSgModule2, '']]
+  HasClientSgModule3: !Not [!Equals [!Ref ClientSgModule3, '']]
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
   HasAppCommand: !Not [!Equals [!Join ['', !Ref AppCommand], '']]
@@ -433,6 +448,8 @@ Resources:
         - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        MountPoints:
+        - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
@@ -456,6 +473,8 @@ Resources:
           - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          MountPoints:
+          - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       Cpu: !FindInMap [CpuMap, !Ref Cpu, Cpu]
       ExecutionRoleArn: !GetAtt 'TaskExecutionRole.Arn'
@@ -464,6 +483,8 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities: [FARGATE]
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
+      Volumes:
+      - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: true}, Name: efs1}, !Ref 'AWS::NoValue']
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
@@ -561,7 +582,7 @@ Resources:
         SubnetA: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdA${SubnetsReach}'}
         SubnetB: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdB${SubnetsReach}'}
         AssignPublicIp: !If [HasSubnetsReachPublic, ENABLED, DISABLED]
-        SecurityGroups: !If [HasClientSgModule1, !Sub ['["${SecurityGroup}", "${ClientSg1}"]', {SecurityGroup: !GetAtt 'SecurityGroup.GroupId', ClientSg1: {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}}], !Sub '["${SecurityGroup.GroupId}"]']
+        SecurityGroups: !Join ['', ['["', !Join ['","', [!Ref SecurityGroup, !If [HasClientSgModule1, {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}, !Ref AWS::NoValue], !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref AWS::NoValue], !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref AWS::NoValue]]], '""]']]
         Timeout: !Ref Timeout
       RoleArn: !GetAtt 'StateMachineRole.Arn'
   SecurityGroup:
@@ -611,7 +632,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-scheduled-task'
   ModuleVersion:
-    Value: '1.3.0'
+    Value: '1.4.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
