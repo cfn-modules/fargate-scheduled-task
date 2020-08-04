@@ -57,7 +57,7 @@ Parameters:
     Default: ''
   AppEntryPoint:
     Description: 'Optional entry point for app container.'
-    Type: String
+    Type: CommaDelimitedList
     Default: ''
   AppCommand:
     Description: 'Optional command for app container.'
@@ -289,7 +289,7 @@ Conditions:
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
   HasAppCommand: !Not [!Equals [!Join ['', !Ref AppCommand], '']]
-  HasAppEntryPoint: !Not [!Equals [!Ref AppEntryPoint, '']]
+  HasAppEntryPoint: !Not [!Equals [!Join ['', !Ref AppEntryPoint], '']]
   HasAppImageSecretModule: !Not [!Equals [!Ref AppImageSecretModule, '']]
   HasAppEnvironment1PlainText: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Equals [!Ref AppEnvironment1SecretModule, '']]
   HasAppEnvironment2PlainText: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Equals [!Ref AppEnvironment2SecretModule, '']]
