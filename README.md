@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/cfn-modules/fargate-scheduled-task.svg?branch=master)](https://travis-ci.org/cfn-modules/fargate-scheduled-task)
-[![NPM version](https://img.shields.io/npm/v/@cfn-modules/fargate-scheduled-task.svg)](https://www.npmjs.com/package/@cfn-modules/fargate-scheduled-task)
-
 # cfn-modules: Fargate scheduled task
 
 Executing an AWS Fargate task based on a schedule (comparable to a `cronjob` on Linux). Uses AWS Step Functions to control and monitor the task execution.
