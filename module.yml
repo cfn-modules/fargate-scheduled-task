@@ -561,7 +561,8 @@ Resources:
                     "AssignPublicIp": "${AssignPublicIp}",
                     "SecurityGroups": ${SecurityGroups}
                   }
-                }
+                },
+                "PlatformVersion": "1.4.0"
               },
               "Retry": [
                 {
