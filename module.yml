@@ -583,7 +583,7 @@ Resources:
         SubnetA: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdA${SubnetsReach}'}
         SubnetB: {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIdB${SubnetsReach}'}
         AssignPublicIp: !If [HasSubnetsReachPublic, ENABLED, DISABLED]
-        SecurityGroups: !Join ['', ['["', !Join ['","', [!Ref SecurityGroup, !If [HasClientSgModule1, {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}, !Ref AWS::NoValue], !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref AWS::NoValue], !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref AWS::NoValue]]], '"]']]
+        SecurityGroups: !Join ['', ['["', !Join ['","', [!Ref SecurityGroup, !If [HasClientSgModule1, {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}, !Ref 'AWS::NoValue'], !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref 'AWS::NoValue'], !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref 'AWS::NoValue']]], '"]']]
         Timeout: !Ref Timeout
       RoleArn: !GetAtt 'StateMachineRole.Arn'
   SecurityGroup:
