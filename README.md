@@ -71,6 +71,8 @@ Resources:
         SubnetsReach: '' # optional
         ScheduleExpression: 'rate(15 minutes)' # optional
         Timeout: '' # optional
+        CpuArchitecture: 'X86_64' # optional
+        OperatingSystemFamily: 'LINUX' # optional
       TemplateURL: './node_modules/@cfn-modules/fargate-scheduled-task/module.yml'
 ```
 
@@ -409,6 +411,20 @@ none
       <td>600</td>
       <td>yes</td>
       <td></td>
+    </tr>
+    <tr>
+      <td>CpuArchitecture</td>
+      <td>The CPU architecture of the container.</td>
+      <td>X86_64</td>
+      <td>no</td>
+      <td>[X86_64, ARM64]</td>
+    </tr>
+    <tr>
+      <td>OperatingSystemFamily</td>
+      <td>The operating system family of the container.</td>
+      <td>LINUX</td>
+      <td>no</td>
+      <td>[LINUX, WINDOWS_SERVER_2004_CORE,  WINDOWS_SERVER_2016_FULL,  WINDOWS_SERVER_2019_CORE,  WINDOWS_SERVER_2019_FULL,  WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL,  WINDOWS_SERVER_20H2_CORE]</td>
     </tr>
   </tbody>
 </table>
