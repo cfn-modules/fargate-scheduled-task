@@ -253,7 +253,14 @@ none
     </tr>
     <tr>
       <td>AppEnvironment4Value</td>
-      <td>Environment variable 4 plain-text value for app container</td>
+      <td>Environment variable 4 plain-text value for app container (if AppEnvironment4Key is set, set either AppEnvironment4Value or AppEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4SecretModule</td>
+      <td>Environment variable 4 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment4Key is set, set either AppEnvironment4Value or AppEnvironment4SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -267,7 +274,14 @@ none
     </tr>
     <tr>
       <td>AppEnvironment5Value</td>
-      <td>Environment variable 5 plain-text value for app container</td>
+      <td>Environment variable 5 plain-text value for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5SecretModule</td>
+      <td>Environment variable 5 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -282,6 +296,272 @@ none
     <tr>
       <td>AppEnvironment6Value</td>
       <td>Environment variable 6 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment7Key</td>
+      <td>Environment variable 7 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment7Value</td>
+      <td>Environment variable 7 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment8Key</td>
+      <td>Environment variable 8 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment8Value</td>
+      <td>Environment variable 8 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment9Key</td>
+      <td>Environment variable 9 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment9Value</td>
+      <td>Environment variable 9 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment10Key</td>
+      <td>Environment variable 10 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment10Value</td>
+      <td>Environment variable 10 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment11Key</td>
+      <td>Environment variable 11 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment11Value</td>
+      <td>Environment variable 11 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment12Key</td>
+      <td>Environment variable 12 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment12Value</td>
+      <td>Environment variable 12 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment13Key</td>
+      <td>Environment variable 13 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment13Value</td>
+      <td>Environment variable 13 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment14Key</td>
+      <td>Environment variable 14 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment14Value</td>
+      <td>Environment variable 14 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment15Key</td>
+      <td>Environment variable 15 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment15Value</td>
+      <td>Environment variable 15 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment16Key</td>
+      <td>Environment variable 16 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment16Value</td>
+      <td>Environment variable 16 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment17Key</td>
+      <td>Environment variable 17 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment17Value</td>
+      <td>Environment variable 17 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment18Key</td>
+      <td>Environment variable 18 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment18Value</td>
+      <td>Environment variable 18 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment19Key</td>
+      <td>Environment variable 19 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment19Value</td>
+      <td>Environment variable 19 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment20Key</td>
+      <td>Environment variable 20 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment20Value</td>
+      <td>Environment variable 20 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment21Key</td>
+      <td>Environment variable 21 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment21Value</td>
+      <td>Environment variable 21 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment22Key</td>
+      <td>Environment variable 22 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment22Value</td>
+      <td>Environment variable 22 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment23Key</td>
+      <td>Environment variable 23 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment23Value</td>
+      <td>Environment variable 23 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment24Key</td>
+      <td>Environment variable 24 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment24Value</td>
+      <td>Environment variable 24 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment25Key</td>
+      <td>Environment variable 25 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment25Value</td>
+      <td>Environment variable 25 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -366,6 +646,48 @@ none
     <tr>
       <td>SidecarEnvironment3SecretModule</td>
       <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4Key</td>
+      <td>Environment variable 4 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4Value</td>
+      <td>Environment variable 4 plain-text value for sidecar container (if SidecarEnvironment4Key is set, set either SidecarEnvironment4Value or SidecarEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4SecretModule</td>
+      <td>Environment variable 4 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment4Key is set, set either SidecarEnvironment4Value or SidecarEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5Key</td>
+      <td>Environment variable 5 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5Value</td>
+      <td>Environment variable 5 plain-text value for sidecar container (if SidecarEnvironment5Key is set, set either SidecarEnvironment5Value or SidecarEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5SecretModule</td>
+      <td>Environment variable 5 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment5Key is set, set either SidecarEnvironment5Value or SidecarEnvironment5SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
